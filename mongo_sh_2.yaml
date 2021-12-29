@@ -12,12 +12,16 @@ spec:
   selector:
     run: mongosh2-1
 ---
-apiVersion: apps/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: mongosh2-1
 spec:
   replicas: 1
+  selector:
+    matchLabels:
+      name: mongosh2-1
+      run: mongosh2-1
   template:
     metadata:
       labels:
@@ -35,8 +39,16 @@ spec:
         volumeMounts:
             - name: mongosh2-1
               mountPath: /data/db
-        command: ["mongod"]
-        args: ["--noprealloc", "--smallfiles", "--replSet", "rs2", "--dbpath","/data/db", "--noauth", "--port", "27017", "--bind_ip_all"]
+        command:
+          - mongod
+          - --shardsvr
+          - --replSet
+          - rs2
+          - --dbpath
+          - /data/db
+          - --port
+          - "27017"
+          - --bind_ip_all
       volumes:
         - name: mongosh2-1
           #persistentVolumeClaim:
@@ -56,12 +68,16 @@ spec:
   selector:
     run: mongosh2-2
 ---
-apiVersion: apps/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: mongosh2-2
 spec:
   replicas: 1
+  selector:
+    matchLabels:
+      name: mongosh2-2
+      run: mongosh2-2
   template:
     metadata:
       labels:
@@ -79,8 +95,16 @@ spec:
         volumeMounts:
             - name: mongosh2-2
               mountPath: /data/db
-        command: ["mongod"]
-        args: ["--noprealloc", "--smallfiles", "--replSet", "rs2", "--dbpath","/data/db", "--noauth", "--port", "27017", "--bind_ip_all"]
+        command:
+          - mongod
+          - --shardsvr
+          - --replSet
+          - rs2
+          - --dbpath
+          - /data/db
+          - --port
+          - "27017"
+          - --bind_ip_all
       volumes:
         - name: mongosh2-2
           #persistentVolumeClaim:
@@ -100,12 +124,16 @@ spec:
   selector:
     run: mongosh2-3
 ---
-apiVersion: apps/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: mongosh2-3
 spec:
   replicas: 1
+  selector:
+    matchLabels:
+      name: mongosh2-3
+      run: mongosh2-3
   template:
     metadata:
       labels:
@@ -123,8 +151,16 @@ spec:
         volumeMounts:
             - name: mongosh2-3
               mountPath: /data/db
-        command: ["mongod"]
-        args: ["--noprealloc", "--smallfiles", "--replSet", "rs2", "--dbpath","/data/db", "--noauth", "--port", "27017", "--bind_ip_all"]
+        command:
+          - mongod
+          - --shardsvr
+          - --replSet
+          - rs2
+          - --dbpath
+          - /data/db
+          - --port
+          - "27017"
+          - --bind_ip_all
       volumes:
         - name: mongosh2-3
           #persistentVolumeClaim:

@@ -11,12 +11,15 @@ spec:
   selector:
     run: mongos1
 ---
-apiVersion: apps/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: mongos1
 spec:
   replicas: 1
+  selector:
+    matchLabels:
+      name: mongos1
   template:
     metadata:
       labels:
@@ -34,8 +37,11 @@ spec:
         volumeMounts:
             - name: mongos1
               mountPath: /data/db
-        command: ["mongos"]
-        args: ["--configdb", "cfgrs/mongocfg1:27019,mongocfg2:27019,mongocfg3:27019", "--bind_ip_all"]
+        command: 
+          - mongos
+          - --configdb
+          - "cfgrs/mongocfg1:27019,mongocfg2:27019,mongocfg3:27019"
+          - --bind_ip_all
       volumes:
         - name: mongos1
 #          persistentVolumeClaim:
@@ -54,12 +60,15 @@ spec:
   selector:
     run: mongos2
 ---
-apiVersion: apps/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: mongos2
 spec:
   replicas: 1
+  selector:
+    matchLabels:
+      name: mongos2
   template:
     metadata:
       labels:
@@ -77,8 +86,11 @@ spec:
         volumeMounts:
             - name: mongos2
               mountPath: /data/db
-        command: ["mongos"]
-        args: ["--configdb", "cfgrs/mongocfg1:27019,mongocfg2:27019,mongocfg3:27019", "--bind_ip_all"]
+        command: 
+          - mongos
+          - --configdb
+          - "cfgrs/mongocfg1:27019,mongocfg2:27019,mongocfg3:27019"
+          - --bind_ip_all
       volumes:
         - name: mongos2
 #          persistentVolumeClaim:
