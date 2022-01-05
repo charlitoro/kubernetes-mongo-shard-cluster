@@ -39,6 +39,7 @@ spec:
         volumeMounts:
             - name: mongosh4-1
               mountPath: /data/db
+        resources: {}
         command:
           - mongod
           - --shardsvr
@@ -95,6 +96,7 @@ spec:
         volumeMounts:
             - name: mongosh4-2
               mountPath: /data/db
+        resources: {}
         command:
           - mongod
           - --shardsvr
@@ -151,6 +153,7 @@ spec:
         volumeMounts:
             - name: mongosh4-3
               mountPath: /data/db
+        resources: {}
         command:
           - mongod
           - --shardsvr
